@@ -81,7 +81,10 @@ class TinyMCEHelper extends AppHelper {
 				$lines .= $tabs;
 				$lines .= (!is_int($option)?(Inflector::underscore($option) . " : "):"");
 				if(!is_array($value)) {
-					$lines .= '"' . $value . '",' . "\n";
+					if(strcasecmp($option, 'setup') == 0)
+						$lines .= $value . ',' . "\n";
+					else
+						$lines .= '"' . $value . '",' . "\n";
 				} else {
 					// If array is assoc
 					if(count(array_filter(array_keys($value), 'is_string'))) {
