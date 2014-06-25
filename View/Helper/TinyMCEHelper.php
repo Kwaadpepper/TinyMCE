@@ -71,9 +71,30 @@ class TinyMCEHelper extends AppHelper {
 		$options = array_merge($this->_defaults, $options);
 		$lines = '';
 
-		foreach ($options as $option => $value) {
-			$lines .= Inflector::underscore($option) . ' : "' . $value . '",' . "\n";
+		function confline($options, $recursiv) {
+			$lines = "";
+			foreach ($options as $option => $value) {
+				$tabs = "";
+				for ($i=$recursiv; $i >= 0; $i--) { 
+					$tabs .= "\t";
+				}
+				$lines .= $tabs;
+				$lines .= (!is_int($option)?(Inflector::underscore($option) . " : "):"");
+				if(!is_array($value)) {
+					$lines .= '"' . $value . '",' . "\n";
+				} else {
+					// If array is assoc
+					if(count(array_filter(array_keys($value), 'is_string'))) {
+						$lines .= "{\n" . confline($value, $recursiv+1) . $tabs . "}," . "\n";
+					} else {
+						$lines .= "[\n" . confline($value, $recursiv+1) . $tabs . "]," . "\n";
+					}					
+				}
+			}
+			return $lines;
 		}
+		$recursiv = 0;
+		$lines = confline($options, $recursiv);
 		// remove last comma from lines to avoid the editor breaking in Internet Explorer
 		$lines = rtrim($lines);
 		$lines = rtrim($lines, ',');
@@ -92,7 +113,7 @@ class TinyMCEHelper extends AppHelper {
 		if ($appOptions !== false && is_array($appOptions)) {
 			$this->_defaults = $appOptions;
 		}
-		$this->Html->script('/TinyMCE/js/tiny_mce/tiny_mce.js', array('inline' => false));
+		$this->Html->script('/TinyMCE/js/tinymce/tinymce.min.js', array('inline' => false));
 	}
 
 }

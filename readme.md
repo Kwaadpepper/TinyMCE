@@ -60,16 +60,28 @@ Here is a basic example of configuration data:
 
 ```php
 $configs = array(
-		'simple' => array(
-			'mode' => 'textareas',
-			'theme' => 'simple',
-			'editor_selector' => 'mceSimple'
-		),
-		'advanced' => array(
-			'mode' => 'textareas',
-			'theme' => 'advanced',
-			'editor_selector' => 'mceAdvanced'
-		)
+	'default' => array(
+		 'selector' => 'textarea',
+		 'theme' => 'modern',
+		'editor_selector' => 'mceAdvanced'
+        ),
+        'full' => array(
+		'selector' => 'textarea',
+		 'theme' => 'modern',
+		 'plugins' => array(
+			 "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+                	"searchreplace wordcount visualblocks visualchars code fullscreen",
+               		 "insertdatetime media nonbreaking save table contextmenu directionality",
+             		 "emoticons template paste textcolor colorpicker textpattern"
+            ),
+            'toolbar1' => "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+            'toolbar2' => "print preview media | forecolor backcolor emoticons",
+            'image_advtab' => true,
+            'templates' => array(
+			array('title' => 'Test template 1', 'content' => 'Test 1'),
+			array('title' => 'Test template 2', 'content' => 'Test 2')
+            )
+        )
 );
 
 $this->TinyMCE->configs = $configs;
@@ -80,7 +92,7 @@ You can also put the configuration in APP/config/bootstap.php or another config 
 ```php
 Configure::write('TinyMCE.configs', array(
 		'simple' => ...,
-		'advanced' => ...));
+		'full' => ...));
 ```
 
 The different sets of configuration data will be auto loaded by the helper inside its constructor. It is suggested that you use this way of passing different configs to the helper because by this you'll be able to store all of them in one place.
@@ -183,3 +195,5 @@ Copyright 2009-2013<br/>
 1785 E. Sahara Avenue, Suite 490-423<br/>
 Las Vegas, Nevada 89104<br/>
 http://cakedc.com<br/>
+
+Update on 25/06/2014 by Munsch Jérémy
