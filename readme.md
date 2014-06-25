@@ -1,3 +1,5 @@
+Update on 25/06/2014 by Munsch Jérémy <jeremy.munsch@gmail.com>
+
 # TinyMCE Plugin for CakePHP #
 
 For cake 2.x
@@ -19,7 +21,7 @@ The TinyMCE helper is basically just a convenience helper that allows you to use
 There two ways you can use this plugin, simply use the helper or load the editor "by hand" using 
 
 ```php
-$this->Html->script('/TinyMCE/js/tiny_mce/tiny_mce.js', array('inline' => false);
+$this->Html->script('/TinyMCE/js/tinymce/tinymce.min.js', array('inline' => false);
 ```
 
 and placing your own script in the head of the page. Please note that the helper will auto add the TinyMCE editor script to the header of the page. No need to to that by hand if you use the helper.
@@ -27,7 +29,7 @@ and placing your own script in the head of the page. Please note that the helper
 If your app is not set up to work in the top level of your host / but instead in /yourapp/ the automatic inclusion of the script wont work. You'll manually have to add the js file to your app:
 
 ```php
-$this->Html->script('/yourapp/TinyMCE/js/tiny_mce/tiny_mce.js', array('inline' => false);
+$this->Html->script('/yourapp/TinyMCE/js/tinymce/tinymce.min.js', array('inline' => false);
 ```
 
 ## How to use the helper ##
@@ -45,7 +47,7 @@ $this->helpers = array('TinyMCE.TinyMCE');
 In the view simply use the editor() method and pass config key/value pairs in an array.
 
 ```php
-$this->TinyMCE->editor(array('theme' => 'advanced', 'mode' => 'textareas'));
+$this->TinyMCE->editor(array('theme' => 'modern', 'selector' => 'textarea'));
 ```
 
 This will instruct TinyMCE to convert all `textarea` elements on the page to TinyMCE editors. If you require some more precise control, or want to change this behavior, checkout the [TinyMCE configuration options](http://www.tinymce.com/wiki.php/Configuration) on the TinyMCE website.
@@ -61,25 +63,25 @@ Here is a basic example of configuration data:
 ```php
 $configs = array(
 	'default' => array(
-		 'selector' => 'textarea',
-		 'theme' => 'modern',
-		'editor_selector' => 'mceAdvanced'
+			'selector' => 'textarea',
+			'theme' => 'modern',
+			'editor_selector' => 'mceAdvanced'
         ),
         'full' => array(
-		'selector' => 'textarea',
-		 'theme' => 'modern',
-		 'plugins' => array(
-			 "advlist autolink lists link image charmap print preview hr anchor pagebreak",
-                	"searchreplace wordcount visualblocks visualchars code fullscreen",
-               		 "insertdatetime media nonbreaking save table contextmenu directionality",
-             		 "emoticons template paste textcolor colorpicker textpattern"
+			'selector' => 'textarea',
+			'theme' => 'modern',
+			'plugins' => array(
+				"advlist autolink lists link image charmap print preview hr anchor pagebreak",
+                "searchreplace wordcount visualblocks visualchars code fullscreen",
+               	"insertdatetime media nonbreaking save table contextmenu directionality",
+             	"emoticons template paste textcolor colorpicker textpattern"
             ),
             'toolbar1' => "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
             'toolbar2' => "print preview media | forecolor backcolor emoticons",
             'image_advtab' => true,
             'templates' => array(
-			array('title' => 'Test template 1', 'content' => 'Test 1'),
-			array('title' => 'Test template 2', 'content' => 'Test 2')
+				array('title' => 'Test template 1', 'content' => 'Test 1'),
+				array('title' => 'Test template 2', 'content' => 'Test 2')
             )
         )
 );
@@ -195,5 +197,3 @@ Copyright 2009-2013<br/>
 1785 E. Sahara Avenue, Suite 490-423<br/>
 Las Vegas, Nevada 89104<br/>
 http://cakedc.com<br/>
-
-Update on 25/06/2014 by Munsch Jérémy
