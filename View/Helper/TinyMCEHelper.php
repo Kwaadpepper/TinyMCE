@@ -18,33 +18,33 @@
 
 class TinyMCEHelper extends AppHelper {
 
-/**
- * Other helpers used by FormHelper
- *
- * @var array
- */
+	/**
+	 * Other helpers used by FormHelper
+	 *
+	 * @var array
+	 */
 	public $helpers = array('Html');
 
-/**
- * Configuration
- *
- * @var array
- */
+	/**
+	 * Configuration
+	 *
+	 * @var array
+	 */
 	public $configs = array();
 
-/**
- * Default values
- *
- * @var array
- */
+	/**
+	 * Default values
+	 *
+	 * @var array
+	 */
 	protected $_defaults = array();
 
-/**
- * Constructor
- *
- * @param View $View The View this helper is being attached to.
- * @param array $settings Configuration settings for the helper.
- */
+	/**
+	 * Constructor
+	 *
+	 * @param View $View The View this helper is being attached to.
+	 * @param array $settings Configuration settings for the helper.
+	 */
 	public function __construct(View $View, $settings = array()) {
 		parent::__construct($View, $settings);
 		$configs = Configure::read('TinyMCE.configs');
@@ -53,13 +53,13 @@ class TinyMCEHelper extends AppHelper {
 		}
 	}
 
-/**
- * Adds a new editor to the script block in the head
- *
- * @see http://www.tinymce.com/wiki.php/Configuration for a list of keys
- * @param mixed If array camel cased TinyMCE Init config keys, if string it checks if a config with that name exists
- * @return void
- */
+	/**
+	 * Adds a new editor to the script block in the head
+	 *
+	 * @see http://www.tinymce.com/wiki.php/Configuration for a list of keys
+	 * @param mixed If array camel cased TinyMCE Init config keys, if string it checks if a config with that name exists
+	 * @return void
+	 */
 	public function editor($options = array()) {
 		if (is_string($options)) {
 			if (isset($this->configs[$options])) {
@@ -75,7 +75,7 @@ class TinyMCEHelper extends AppHelper {
 			$lines = "";
 			foreach ($options as $option => $value) {
 				$tabs = "";
-				for ($i=$recursiv; $i >= 0; $i--) { 
+				for ($i=$recursiv; $i >= 0; $i--) {
 					$tabs .= "\t";
 				}
 				$lines .= $tabs;
@@ -91,7 +91,7 @@ class TinyMCEHelper extends AppHelper {
 						$lines .= "{\n" . confline($value, $recursiv+1) . $tabs . "}," . "\n";
 					} else {
 						$lines .= "[\n" . confline($value, $recursiv+1) . $tabs . "]," . "\n";
-					}					
+					}
 				}
 			}
 			return $lines;
@@ -104,13 +104,13 @@ class TinyMCEHelper extends AppHelper {
 		$this->Html->scriptBlock('tinymce.init({' . "\n" . $lines . "\n" . '});' . "\n", array('inline' => false));
 	}
 
-/**
- * beforeRender callback
- * 
- * @param string $viewFile The view file that is going to be rendered
- * 
- * @return void
- */
+	/**
+	 * beforeRender callback
+	 *
+	 * @param string $viewFile The view file that is going to be rendered
+	 *
+	 * @return void
+	 */
 	public function beforeRender($viewFile) {
 		$appOptions = Configure::read('TinyMCE.editorOptions');
 		if ($appOptions !== false && is_array($appOptions)) {
